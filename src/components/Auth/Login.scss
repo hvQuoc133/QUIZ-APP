@@ -1,0 +1,120 @@
+body {
+    background-color: rgba(247, 249, 250, 1.00);
+}
+
+.login-container {
+    padding-top: 100px;
+
+    .wellcome {
+        font-size: 20px;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .content-form {
+
+        text-align: left;
+        width: 450px;
+        height: 390px;
+        border-radius: 10px;
+        padding: 30px 50px;
+        background-color: #fff;
+
+        .title {
+            font-size: 30px;
+            font-weight: 700;
+            font-family: "Apercu Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            font-style: normal;
+            text-align: center;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 700;
+            font-family: "Apercu Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            font-style: normal;
+            font-size: 17px;
+        }
+
+        input {
+            margin-bottom: 15px;
+            margin-top: 3px;
+        }
+
+        .forgot-password {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        button {
+            width: 100%;
+            height: 45px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: black;
+            margin-top: 20px;
+            font-size: 17px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: rgb(41, 38, 38);
+            }
+        }
+
+        .spin-icon {
+            animation: spin 3s infinite linear;
+        }
+
+        @keyframes spin {
+            from {
+                transform: scale(1) rotate(0deg);
+            }
+
+            to {
+                transform: scale(1) rotate(360deg);
+            }
+
+        }
+    }
+
+    .footer {
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 20px;
+
+        .backHome {
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 10px;
+            font-family: "Apercu Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            font-style: normal;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        button {
+            height: 40px;
+            width: 80px;
+            border: 1px solid;
+            border-radius: 5px;
+            color: black;
+            background-color: white;
+            font-size: 14px;
+            font-weight: 700;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+            padding: 5px;
+
+            &:hover {
+                color: white;
+                background-color: black;
+            }
+        }
+
+    }
+}

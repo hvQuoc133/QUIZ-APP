@@ -1,0 +1,28 @@
+.list-quiz-container {
+    display: flex;
+    gap: 50px;
+
+    .card {
+        width: 18rem;
+        top: 100px;
+        border: 1px solid transparent;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.1);
+            border-color: gray;
+            box-shadow: 0 0 5px cyan,
+                       0 0 15px cyan,
+                       0 0 25px cyan,
+                       0 0 35px cyan;
+
+        }
+    }
+
+    .card-undefine {
+        margin-top: 100px;
+        color: red;
+        font-weight: 700;
+        font-size: 25px;
+    }
+}

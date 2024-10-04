@@ -1,0 +1,16 @@
+.user-pagination {
+    display: flex;
+    justify-content: center;
+
+    .pagination {
+        .page-item {
+            margin: 0 5px;
+            border-radius: 5;
+
+            &.active {
+                border: 2px solid #007bff;
+                border-radius: 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.admin-contaner {
+    display: flex;
+
+    .admin-sidebar {
+
+        .pro-sidebar {
+            height: 100vh !important;
+        }
+    }
+
+    .admin-content {
+        width: 100%;
+
+        .icon-fabars {
+            width: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: flex;
+            
+
+            &.collapsed {
+                transform: rotate(90deg);
+            }
+        }
+
+        .admin-main {}
+    }
+}

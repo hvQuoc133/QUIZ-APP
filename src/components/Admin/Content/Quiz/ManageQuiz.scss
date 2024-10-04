@@ -1,0 +1,33 @@
+.quiz-container {
+    padding: 15px;
+
+    .title {
+        font-size: 25px;
+        font-weight: 700;
+
+        .btn-add-new{
+            margin-top: 10px;
+        margin-bottom: 40px;
+        
+        }
+    }
+
+    .list-detail {
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+
+            .page-item {
+                margin: 0 5px;
+                border-radius: 5;
+
+                &.active {
+                    border: 2px solid #007bff;
+                    border-radius: 5px;
+                    background-color: #e7f1ff;
+                }
+
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+.table-list-quiz {
+    th {
+        min-width: 50px;
+    }
+
+    td {
+        vertical-align: middle;
+        font-family: "Apercu Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        font-style: normal;
+        min-width: 250px;
+    }
+
+    .content-quiz {
+        .action-btn {
+            button {
+                margin-right: 5px;
+                margin-left: 5px;
+            }
+
+        }
+    }
+}

@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
 
-    const navigate  = useNavigate();
+    const navigate = useNavigate();
     return (
         <>
             <ProSidebar
@@ -46,10 +46,13 @@ const Sidebar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                                 <Link to="/admin/manage-users" />
                             </MenuItem>
                             <MenuItem>
-                             Quản lý bài Quiz
+                                Quản lý bài Quiz
                                 <Link to="/admin/manage-quizzes" />
-                             </MenuItem>
-                            <MenuItem> Quản lý câu hỏi</MenuItem>
+                            </MenuItem>
+                            <MenuItem>
+                                Quản lý câu hỏi
+                                <Link to="/admin/manage-questions" />
+                            </MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>

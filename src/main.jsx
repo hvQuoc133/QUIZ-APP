@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { store, persistor } from './redux/store';
 import '../node_modules/nprogress/nprogress.css';
 import { PersistGate } from 'redux-persist/integration/react';
+import "react-awesome-lightbox/build/style.css";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

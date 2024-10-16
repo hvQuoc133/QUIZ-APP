@@ -8,28 +8,29 @@ import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import Lightbox from "react-awesome-lightbox";
 import { getAllQuizForAdmin } from "../../../../services/apiService";
-import { postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion } 
-from '../../../../services/apiService';
+import { postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion }
+    from '../../../../services/apiService';
+import { toast } from 'react-toastify';
 
 const Questions = (props) => {
 
-    const [questions, setQuestions] = useState(
-        [
-            {
-                id: uuidv4(),
-                description: '',
-                imageFile: '',
-                imageName: '',
-                answers: [
-                    {
-                        id: uuidv4(),
-                        description: '',
-                        isCorrect: false
-                    }
-                ]
-            }
-        ]
-    )
+    const initQuestions = [
+        {
+            id: uuidv4(),
+            description: '',
+            imageFile: '',
+            imageName: '',
+            answers: [
+                {
+                    id: uuidv4(),
+                    description: '',
+                    isCorrect: false
+                }
+            ]
+        }
+    ];
+
+    const [questions, setQuestions] = useState(initQuestions);
 
     const [isPreviewImg, setIsPreviewImg] = useState(false);
 
@@ -151,30 +152,69 @@ const Questions = (props) => {
     }
 
     const handleSubmitQuestionForQuiz = async () => {
-             // todo
+        // todo
 
-            // validate data
+        // validate quiz
+        if (_.isEmpty(selectedQuiz)) {
+            toast.error("Please choose a Quiz!")
+            return;
+        }
 
-            // submit questions
-        await Promise.all(questions.map(async (question) => {
+        // validate answer
+        let isValidAnswer = true;
+        let indexQuestion = 0, indexAnswer = 0;
+        for (let i = 0; i < questions.length; i++) {
+
+            for (let j = 0; j < questions[i].answers.length; j++) {
+                if (!questions[i].answers[j].description) {
+                    isValidAnswer = false;
+                    indexAnswer = j;
+                    break;
+                }
+            }
+            indexQuestion = i;
+            if (isValidAnswer === false) break;
+        }
+
+        if (isValidAnswer === false) {
+            toast.error(`Not empty Answer ${indexAnswer + 1} at Question ${indexQuestion + 1}`)
+            return;
+        }
+
+        // validate question
+        let isValidQuestion = true;
+        let indexQuest = 0;
+        for (let i = 0; i < questions.length; i++) {
+            if (!questions[i].description) {
+                isValidQuestion = false
+                indexQuest = i;
+                break;
+            }
+        }
+
+        if (isValidQuestion === false) {
+            toast.error(`Not empty description for Question ${indexQuest + 1}`)
+            return;
+        }
+
+
+
+        // submit questions
+        for (const question of questions) {
             const q = await postCreateNewQuestionForQuiz(
-                +selectedQuiz.value, 
-                question.description, 
-                question.imageFile.image
+                +selectedQuiz.value,
+                question.description,
+                question.imageFile
             );
-
             // submit answers
-        await Promise.all(question.answers.map(async (answer) => {
+            for (const answer of question.answers) {
                 await postCreateNewAnswerForQuestion(
                     answer.description, answer.isCorrect, q.DT.id
                 )
-            }))
-        }));
-
-       
-
-        
-
+            }
+        }
+        toast.success("Create questions and answers succed!")
+        setQuestions(initQuestions);
     }
 
     const handlePreviewImg = (questionId) => {
@@ -287,7 +327,7 @@ const Questions = (props) => {
                         )
                     })
                 }
-                
+
                 {
                     questions && questions.length > 0 &&
                     <div>

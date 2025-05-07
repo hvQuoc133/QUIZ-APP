@@ -42,6 +42,15 @@
       }
     }
 
+    .Languages {
+
+      margin-right: 50px;
+
+      .dropdown-toggle::after {
+        display: none !important;
+      }
+    }
+
     .navbar {
       padding-top: 20px;
       z-index: 20;
@@ -51,7 +60,7 @@
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
       &.scrolled {
-        background-color: white !important;
+        background-color: rgb(156, 27, 27) !important;
         /* Hoặc màu nền bạn muốn */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
@@ -73,6 +82,7 @@
       }
     }
   }
+
   .app-content {}
 }
 

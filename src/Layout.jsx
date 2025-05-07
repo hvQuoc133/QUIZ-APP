@@ -13,6 +13,8 @@ import ListQuiz from "./components/User/ListQuiz.jsx";
 import DetailQuiz from "./components/User/DetailQuiz.jsx";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz.jsx";
 import Questions from "./components/Admin/Content/Question/Questions.jsx";
+import PrivateRoute from "./routes/PrivateRoute.jsx";
+import React, { Suspense } from 'react';
 
 const NotFound = () => {
     return(
@@ -25,15 +27,23 @@ const NotFound = () => {
 
 const Layout = (props) => {
     return (
-        <>
+        <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 <Route path='/' element={<App />}>
                     <Route index element={<HomePage />} />
-                    <Route path='/users' element={<ListQuiz />} />
+                    <Route path='/users' element={
+                        <PrivateRoute>
+                            <ListQuiz />
+                        </PrivateRoute>
+                    } />
                 </Route>
                 <Route path='/quiz/:id' element={<DetailQuiz />} />
 
-                <Route path='admin' element={<Admin />} >
+                <Route path='admin' element={
+                    <PrivateRoute>
+                    <Admin />
+                    </PrivateRoute>
+                    } >
                     <Route index element={<DashBoard />} />
                     <Route path='manage-users' element={<ManageUser />} />
                     <Route path='manage-quizzes' element={<ManageQuiz />} />
@@ -58,7 +68,7 @@ const Layout = (props) => {
                 theme="light"
                 transition={Bounce}
             />
-        </>
+        </Suspense>
     )
 }
 

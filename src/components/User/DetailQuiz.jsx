@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, NavLink } from "react-router-dom";
 import { getDataQuiz, postSubmitQuiz } from "../../services/apiService";
 import _ from 'lodash';
 import './DetailQuiz.scss';
 import Question from "./Question";
 import ModalResult from "./ModalResult";
+import RightContent from "./Content/RightContent";
+import { Breadcrumb } from 'react-bootstrap';
 
 const DetailQuiz = (props) => {
 
@@ -41,6 +43,7 @@ const DetailQuiz = (props) => {
                         item.answers.isSelected = false;
                         answers.push(item.answers);
                     })
+                    answers = _.orderBy(answers, ['id'], ['asc']);
                     return { questionId: key, answers, questionDescription, image }
 
                 })
@@ -59,7 +62,7 @@ const DetailQuiz = (props) => {
             setIndex(index + 1);
     }
 
-    const handleFinishQuiz = async() => {
+    const handleFinishQuiz = async () => {
         let payload = {
             quizId: +quizId,
             answers: []
@@ -85,14 +88,14 @@ const DetailQuiz = (props) => {
             // submit api
             let res = await postSubmitQuiz(payload);
             console.log('check res', res);
-            if(res && res.EC === 0){
+            if (res && res.EC === 0) {
                 setdataModalResult({
                     countCorrect: res.DT.countCorrect,
                     countTotal: res.DT.countTotal,
                     quizData: res.DT.quizData
                 });
-                setIsShowModalResult(true);           
-            }else {
+                setIsShowModalResult(true);
+            } else {
                 alert('something wrong')
             }
 
@@ -118,6 +121,20 @@ const DetailQuiz = (props) => {
     }
 
     return (
+        <>
+
+             <Breadcrumb className='quiz-detail-new-header'>
+              <NavLink to='/' className='breadcrumb-item'>
+                Trang chủ
+              </NavLink>
+                <NavLink to='/users' className='breadcrumb-item'>
+                    Users
+                </NavLink>
+                <Breadcrumb.Item active>
+                    Quiz
+                </Breadcrumb.Item>
+             </Breadcrumb>
+
         <div className="detail-quiz-container">
             <div className="left-content">
                 <div className="title">
@@ -137,10 +154,15 @@ const DetailQuiz = (props) => {
                 </div>
             </div>
             <div className="right-content">
-                right-content
+                <RightContent
+                    dataQuiz={dataQuiz}
+                    handleFinishQuiz={handleFinishQuiz}
+                    setIndex={setIndex}
+                />
             </div>
-            <ModalResult show={isShowModalResult} setShow={setIsShowModalResult} dataModalResult={dataModalResult}/>
+            <ModalResult show={isShowModalResult} setShow={setIsShowModalResult} dataModalResult={dataModalResult} />
         </div>
+        </>
     )
 }
 
